@@ -112,7 +112,8 @@ for (n in 1:length(is_weekday)) {
   else{ act_full_data$day_type[n] <- 'weekend' }
 }
 ```
-Lets Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
+Lets Make a panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
+
 
 ```{r,fig.width=8, fig.height=6}
 act_full_by_day_type <- group_by(act_full_data,day_type,interval) %>% 
@@ -120,6 +121,8 @@ act_full_by_day_type <- group_by(act_full_data,day_type,interval) %>%
 par(mfrow=c(2,1))
 weekday <- filter(act_full_by_day_type,day_type=="weekday")
 weekend <- filter(act_full_by_day_type,day_type=="weekend")
-with(weekday,plot(interval,steps,type="l"))
-with(weekend,plot(interval,steps,type="l"))
+with(weekday,plot(interval,steps,type="l",main="Weekday"))
+with(weekend,plot(interval,steps,type="l",main="Weekend"))
 ```
+
+As you can see from  plots above that there are some differences in average steps during weekend v.s. weekdays looks like on weekdays lot of activity is seen between 5.00 am to 10 am and the activity slows down after 10 am whearas on weekends activity start after 8.00 am and remains pretty much throughout day until 9.00 pm
